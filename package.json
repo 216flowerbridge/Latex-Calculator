@@ -1,0 +1,77 @@
+{
+  "name": "latex-math-studio",
+  "version": "1.0.0",
+  "description": "A standalone desktop app that parses LaTeX formulas and performs symbolic math calculations.",
+  "main": "app/main.js",
+  "author": "sng ggh",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dist:win": "electron-builder --win nsis portable",
+    "dist:mac": "electron-builder --mac dmg zip",
+    "dist:linux": "electron-builder --linux AppImage deb",
+    "dist:all": "electron-builder -mwl"
+  },
+  "dependencies": {
+    "katex": "^0.16.11",
+    "mathjs": "^13.2.0",
+    "nerdamer": "^1.1.13"
+  },
+  "devDependencies": {
+    "electron": "^31.7.7",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.local.latexmathstudio",
+    "productName": "LaTeX Math Studio",
+    "copyright": "Copyright © 2026",
+    "asar": true,
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "app/**/*",
+      "package.json",
+      "node_modules/**/*"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "perMachine": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "LaTeX Math Studio"
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "category": "public.app-category.education"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "Education"
+    }
+  }
+}
